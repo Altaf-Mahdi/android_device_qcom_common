@@ -224,6 +224,14 @@ int power_hint_override(__attribute__((unused)) struct power_module *module,
     }
 
     if (hint == POWER_HINT_LAUNCH_BOOST) {
+        launch_boost_info_t *info = (launch_boost_info_t *)data;
+        if (info == NULL) {
+            ALOGE("Invalid argument for launch boost");
+            return HINT_HANDLED;
+        }
+
+        ALOGV("LAUNCH_BOOST: %s (pid=%d)", info->packageName, info->pid);
+
         int duration = 2000;
         int resources[] = {
             ALL_CPUS_PWR_CLPS_DIS,
@@ -232,6 +240,7 @@ int power_hint_override(__attribute__((unused)) struct power_module *module,
             0x20F
         };
 
+        start_prefetch(info->pid, info->packageName);
         interaction(duration, sizeof(resources)/sizeof(resources[0]), resources);
 
         return HINT_HANDLED;
