@@ -229,8 +229,8 @@ int power_hint_override(__attribute__((unused)) struct power_module *module,
 
         ALOGV("LAUNCH_BOOST: %s (pid=%d)", info->packageName, info->pid);
 
-        int duration = 2000;
-        int resources[] = { SCHED_BOOST_ON, 0x20C };
+        int duration = 1000;
+        int resources[] = { SCHED_BOOST_ON };
 
         start_prefetch(info->pid, info->packageName);
         interaction(duration, ARRAY_SIZE(resources), resources);
