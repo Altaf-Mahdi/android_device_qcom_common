@@ -350,7 +350,7 @@ int power_hint_override(__unused struct power_module *module,
             return HINT_HANDLED;
         }
 
-        duration = 2000;
+        duration = 1500;
 
         ALOGV("LAUNCH_BOOST: %s (pid=%d)", info->packageName, info->pid);
 
